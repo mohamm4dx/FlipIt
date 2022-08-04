@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FlipIt": {
+      "commandName": "Project",
+      "commandLineArgs": "/c"
+    }
+  }
+}
