@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -10,9 +11,9 @@ namespace FlipIt.Controls
     public enum TimeFormat
     {
         [Description("24 Hours")]
-        TwentyFourHours,
+        TwentyFourHours = 24,
         [Description("12 Hours")]
-        TwelveHours
+        TwelveHours = 12
     }
 
     //https://github.com/HandyOrg/HandyControl/blob/0633da94459b3f636f2fe4263098b2cff9aa1b51/src/Shared/HandyControl_Shared/Controls/Time/FlipClock/FlipClock.cs
@@ -41,8 +42,8 @@ namespace FlipIt.Controls
 
             control.NumberList = new List<int>
             {
-                control.TimeFormat == TimeFormat.TwentyFourHours ? value.Hour / 10 : value.ToString("tt").Equals("pm", StringComparison.OrdinalIgnoreCase) ? value.Hour switch { 10 or 11 or 12 => 1, _ => 0 } : value.Hour switch { 10 or 11 => 1, 12 => 0, _ => 0 },
-                control.TimeFormat == TimeFormat.TwentyFourHours ? value.Hour % 10 : value.ToString("tt").Equals("pm", StringComparison.OrdinalIgnoreCase) ? value.Hour switch { 10 => 0, 11 => 1, 12 => 2, _ => value.Hour % 12 } : value.Hour switch { 10 => 0, 11 => 1, 12 => 0, _ => value.Hour % 12 },
+                control.TimeFormat == TimeFormat.TwentyFourHours ? value.Hour / 10 : value.ToString("tt").Equals("pm", StringComparison.OrdinalIgnoreCase) ? value.Hour switch { 11 or 12 => 1, _ => 0 } : value.Hour switch { 11 => 1, 12 => 0, _ => 0 },
+                control.TimeFormat == TimeFormat.TwentyFourHours ? value.Hour % 10 : value.ToString("tt").Equals("pm", StringComparison.OrdinalIgnoreCase) ? value.Hour switch { 11 => 1, 12 => 2, _ => value.Hour % 12 } : value.Hour switch { 11 => 1, 12 => 0, _ => value.Hour % 12 },
                 value.Minute / 10,
                 value.Minute % 10,
                 value.Second / 10,
