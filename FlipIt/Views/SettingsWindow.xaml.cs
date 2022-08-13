@@ -31,6 +31,7 @@ namespace FlipIt.Views
 
         private void TimeFormatComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!IsLoaded) return;
             GlobalData.TimeFormat = (TimeFormat)((ComboBox)sender).SelectedIndex;
         }
 
